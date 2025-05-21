@@ -25,14 +25,14 @@ export function TimestampItem({
     <Card className="mb-3 shadow-sm break-inside-avoid bg-card">
       <CardHeader className="pb-2 pt-4 px-4">
         <CardTitle className="text-base font-semibold text-card-foreground">
-          Timestamp: {formatTime(timestampEntry.time)}
+          Marca de Tiempo: {formatTime(timestampEntry.time)}
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-3 min-h-[40px]">
         {isGeneratingDescription ? (
           <div className="flex items-center text-sm text-muted-foreground">
             <Loader2 className="mr-2 h-4 w-4 animate-spin text-primary" />
-            Generating description...
+            Generando descripción...
           </div>
         ) : timestampEntry.description ? (
           <CardDescription className="text-sm whitespace-pre-wrap text-card-foreground/90">
@@ -40,7 +40,7 @@ export function TimestampItem({
           </CardDescription>
         ) : (
           <CardDescription className="text-sm italic text-muted-foreground">
-            No description yet. Click "Describe" to generate one.
+            Aún no hay descripción. Haz clic en "Describir" para generar una.
           </CardDescription>
         )}
       </CardContent>
@@ -49,8 +49,8 @@ export function TimestampItem({
           variant="outline"
           size="sm"
           onClick={() => onDescribe(timestampEntry.id)}
-          aria-label={timestampEntry.description ? "Regenerate description" : "Generate description"}
-          title={timestampEntry.description ? "Regenerate description" : "Generate description"}
+          aria-label={timestampEntry.description ? "Regenerar descripción" : "Generar descripción"}
+          title={timestampEntry.description ? "Regenerar descripción" : "Generar descripción"}
           disabled={isGeneratingDescription}
           className="hover:bg-accent/10 hover:text-accent-foreground"
         >
@@ -59,14 +59,14 @@ export function TimestampItem({
           ) : (
             <Sparkles className="mr-1.5 h-4 w-4" />
           )}
-          {isGeneratingDescription ? 'Generating...' : (timestampEntry.description ? 'Re-Describe' : 'Describe')}
+          {isGeneratingDescription ? 'Generando...' : (timestampEntry.description ? 'Re-Describir' : 'Describir')}
         </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={() => onCopy(timestampEntry)}
-          aria-label="Copy timestamp and description"
-          title="Copy timestamp and description"
+          aria-label="Copiar marca de tiempo y descripción"
+          title="Copiar marca de tiempo y descripción"
           className="hover:bg-accent/10 hover:text-accent-foreground"
         >
           <Copy className="h-4 w-4" />
@@ -75,8 +75,8 @@ export function TimestampItem({
           variant="destructive"
           size="sm"
           onClick={() => onDelete(timestampEntry.id)}
-          aria-label="Delete timestamp"
-          title="Delete timestamp"
+          aria-label="Eliminar marca de tiempo"
+          title="Eliminar marca de tiempo"
         >
           <Trash2 className="h-4 w-4" />
         </Button>

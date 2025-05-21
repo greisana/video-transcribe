@@ -23,8 +23,8 @@ export function VideoUpload({ onVideoSelect }: VideoUploadProps) {
         onVideoSelect(file);
       } else {
         toast({
-          title: "Invalid File Type",
-          description: "Please upload a valid video file.",
+          title: "Tipo de Archivo Inválido",
+          description: "Por favor, sube un archivo de video válido.",
           variant: "destructive",
         });
       }
@@ -42,8 +42,8 @@ export function VideoUpload({ onVideoSelect }: VideoUploadProps) {
           onVideoSelect(file);
         } else {
           toast({
-            title: "Invalid File Type",
-            description: "Please upload a valid video file.",
+            title: "Tipo de Archivo Inválido",
+            description: "Por favor, sube un archivo de video válido.",
             variant: "destructive",
           });
         }
@@ -76,8 +76,8 @@ export function VideoUpload({ onVideoSelect }: VideoUploadProps) {
     >
       <CardHeader className="text-center">
         <UploadCloud className="mx-auto h-16 w-16 text-muted-foreground" />
-        <CardTitle className="mt-4 text-xl">Upload Your Video</CardTitle>
-        <CardDescription>Drag & drop a video file here, or click to select</CardDescription>
+        <CardTitle className="mt-4 text-xl">Sube Tu Video</CardTitle>
+        <CardDescription>Arrastra y suelta un archivo de video aquí, o haz clic para seleccionar</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col items-center space-y-4 p-6 pt-2">
         <Input
@@ -89,10 +89,10 @@ export function VideoUpload({ onVideoSelect }: VideoUploadProps) {
         />
         <Button asChild variant="default" size="lg">
           <label htmlFor="video-upload-input" className="cursor-pointer">
-            Select File
+            Seleccionar Archivo
           </label>
         </Button>
-         <p className="text-xs text-muted-foreground">Supports MP4, WebM, Ogg, etc.</p>
+         <p className="text-xs text-muted-foreground">Compatible con MP4, WebM, Ogg, etc.</p>
       </CardContent>
     </Card>
   );

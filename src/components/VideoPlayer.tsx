@@ -16,13 +16,13 @@ export function VideoPlayer({ videoSrc, videoRef, onTimeUpdate, onLoadedMetadata
     if (!videoElement) return;
 
     const handleTimeUpdate = () => {
-      if (videoElement) { // Check if still mounted
+      if (videoElement) { 
         onTimeUpdate(videoElement.currentTime);
       }
     };
     
     const handleLoadedMetadata = () => {
-      if (videoElement) { // Check if still mounted
+      if (videoElement) { 
         onLoadedMetadata();
       }
     };
@@ -30,14 +30,13 @@ export function VideoPlayer({ videoSrc, videoRef, onTimeUpdate, onLoadedMetadata
     videoElement.addEventListener("timeupdate", handleTimeUpdate);
     videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
 
-    // When videoSrc changes, update the source and load it.
     if (videoElement.src !== videoSrc) {
         videoElement.src = videoSrc;
         videoElement.load();
     }
     
     return () => {
-      if (videoElement) { // Check if still mounted before removing listeners
+      if (videoElement) { 
         videoElement.removeEventListener("timeupdate", handleTimeUpdate);
         videoElement.removeEventListener("loadedmetadata", handleLoadedMetadata);
       }
@@ -50,9 +49,9 @@ export function VideoPlayer({ videoSrc, videoRef, onTimeUpdate, onLoadedMetadata
         ref={videoRef}
         controls
         className="w-full h-full"
-        preload="metadata" // ensures metadata (like duration) is loaded quickly
+        preload="metadata"
       >
-        Your browser does not support the video tag.
+        Tu navegador no soporta la etiqueta de video.
       </video>
     </div>
   );

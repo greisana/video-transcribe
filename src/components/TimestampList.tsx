@@ -24,10 +24,10 @@ export function TimestampList({
   return (
     <Card className="flex-grow flex flex-col bg-card shadow-md">
       <CardHeader className="sticky top-0 bg-card z-10 border-b">
-        <CardTitle className="text-lg text-card-foreground">Timestamps</CardTitle>
+        <CardTitle className="text-lg text-card-foreground">Marcas de Tiempo</CardTitle>
         {timestamps.length === 0 && (
           <CardDescription className="text-sm text-muted-foreground pt-1">
-            No timestamps yet. Add some from the video.
+            Aún no hay marcas de tiempo. Añade algunas desde el video.
           </CardDescription>
         )}
       </CardHeader>
@@ -35,7 +35,7 @@ export function TimestampList({
         {timestamps.length === 0 ? (
           <div className="flex items-center justify-center h-full p-4">
             <p className="text-muted-foreground text-center">
-              Play the video and click "Add Timestamp" to get started.
+              Reproduce el video y haz clic en "Añadir Marca de Tiempo" para comenzar.
             </p>
           </div>
         ) : (

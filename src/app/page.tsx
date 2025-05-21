@@ -35,10 +35,10 @@ export default function HomePage() {
       setTimestamps([]);
       setCurrentTime(0);
     } catch (error) {
-      console.error("Error reading video file:", error);
+      console.error("Error al leer el archivo de video:", error);
       toast({
-        title: "Error Uploading Video",
-        description: "Could not read the video file. Please try again.",
+        title: "Error al Subir Video",
+        description: "No se pudo leer el archivo de video. Por favor, inténtalo de nuevo.",
         variant: "destructive",
       });
       setVideoFile(null);
@@ -55,7 +55,7 @@ export default function HomePage() {
   const handleLoadedMetadata = useCallback(() => {
     setIsVideoReady(true);
     if (videoRef.current) {
-        setCurrentTime(videoRef.current.currentTime); // Ensure current time is updated once ready
+        setCurrentTime(videoRef.current.currentTime); 
     }
   }, []);
 
@@ -63,11 +63,10 @@ export default function HomePage() {
     if (!videoRef.current || !isVideoReady) return;
     const newTimestampTime = videoRef.current.currentTime;
     
-    // Prevent adding duplicate timestamps at the exact same millisecond
     if (timestamps.some(ts => Math.abs(ts.time - newTimestampTime) < 0.01)) {
       toast({
-        title: "Timestamp Exists",
-        description: `A timestamp at ${formatTime(newTimestampTime)} already exists.`,
+        title: "La Marca de Tiempo Ya Existe",
+        description: `Ya existe una marca de tiempo en ${formatTime(newTimestampTime)}.`,
         variant: "default",
       });
       return;
@@ -80,19 +79,19 @@ export default function HomePage() {
     };
     setTimestamps((prev) => [...prev, newTimestamp].sort((a,b) => a.time - b.time));
     toast({
-      title: "Timestamp Added",
-      description: `Added timestamp at ${formatTime(newTimestamp.time)}`,
+      title: "Marca de Tiempo Añadida",
+      description: `Marca de tiempo añadida en ${formatTime(newTimestamp.time)}`,
     });
   }, [toast, isVideoReady, timestamps]);
 
   const handleAutoDescribe = useCallback(async (id: string) => {
     if (!videoSrc) {
-      toast({ title: "Error", description: "No video loaded.", variant: "destructive" });
+      toast({ title: "Error", description: "No se ha cargado ningún video.", variant: "destructive" });
       return;
     }
     const timestampToDescribe = timestamps.find(ts => ts.id === id);
     if (!timestampToDescribe) {
-      toast({ title: "Error", description: "Timestamp not found.", variant: "destructive" });
+      toast({ title: "Error", description: "Marca de tiempo no encontrada.", variant: "destructive" });
       return;
     }
 
@@ -116,17 +115,19 @@ export default function HomePage() {
         )
       );
       toast({
-        title: "Description Generated",
-        description: `AI description added for ${formatTime(timestampToDescribe.time)}`,
+        title: "Descripción Generada",
+        description: `Descripción de IA añadida para ${formatTime(timestampToDescribe.time)}`,
       });
     } catch (error) {
-      console.error("Error generating description:", error);
-      let errorMessage = "Could not generate description. Please try again.";
+      console.error("Error generando descripción:", error);
+      let errorMessage = "No se pudo generar la descripción. Por favor, inténtalo de nuevo.";
       if (error instanceof Error) {
-        errorMessage = error.message;
+        // It's better to show a generic translated error unless the error.message itself is localized
+        // For now, we'll stick to the generic one for simplicity
+        // errorMessage = error.message; 
       }
       toast({
-        title: "AI Description Failed",
+        title: "Falló la Descripción de IA",
         description: errorMessage,
         variant: "destructive",
       });
@@ -136,20 +137,20 @@ export default function HomePage() {
   }, [videoSrc, timestamps, toast]);
 
   const handleCopyToClipboard = useCallback((entry: TimestampEntry) => {
-    const textToCopy = `Timestamp: ${formatTime(entry.time)}\nDescription: ${entry.description || "N/A"}`;
+    const textToCopy = `Marca de Tiempo: ${formatTime(entry.time)}\nDescripción: ${entry.description || "N/A"}`;
     navigator.clipboard.writeText(textToCopy)
       .then(() => {
-        toast({ title: "Copied!", description: "Timestamp copied to clipboard." });
+        toast({ title: "¡Copiado!", description: "Marca de tiempo copiada al portapapeles." });
       })
       .catch(err => {
-        console.error("Failed to copy:", err);
-        toast({ title: "Copy Failed", description: "Could not copy to clipboard.", variant: "destructive" });
+        console.error("Error al copiar:", err);
+        toast({ title: "Error al Copiar", description: "No se pudo copiar al portapapeles.", variant: "destructive" });
       });
   }, [toast]);
 
   const handleDeleteTimestamp = useCallback((id: string) => {
     setTimestamps(prev => prev.filter(ts => ts.id !== id));
-    toast({ title: "Timestamp Deleted", variant: "default" });
+    toast({ title: "Marca de Tiempo Eliminada", variant: "default" });
   }, [toast]);
 
   return (
@@ -158,7 +159,7 @@ export default function HomePage() {
         <div className="container mx-auto flex items-center justify-between max-w-7xl px-4">
           <div className="flex items-center space-x-3">
             <Film className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-semibold tracking-tight">NoCodeVidEdit</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">EditorDeVideoSinCódigo</h1>
           </div>
         </div>
       </header>
@@ -171,7 +172,7 @@ export default function HomePage() {
                 <Card className="w-full max-w-lg mx-auto shadow-lg">
                   <CardContent className="p-10 flex flex-col items-center justify-center space-y-3">
                     <Loader2 className="h-12 w-12 animate-spin text-primary" />
-                    <p className="text-muted-foreground text-lg">Processing video...</p>
+                    <p className="text-muted-foreground text-lg">Procesando video...</p>
                   </CardContent>
                 </Card>
               ) : (
@@ -195,7 +196,7 @@ export default function HomePage() {
                   size="lg"
                 >
                   <PlusCircle className="mr-2 h-5 w-5" />
-                  Add Timestamp at {formatTime(currentTime)}
+                  Añadir Marca de Tiempo en {formatTime(currentTime)}
                 </Button>
               </div>
             </div>

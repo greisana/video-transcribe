@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'NoCodeVidEdit',
-  description: 'Edit videos with no code, just timestamps and AI descriptions.',
+  title: 'EditorDeVideoSinCódigo',
+  description: 'Edita videos sin código, solo con marcas de tiempo y descripciones generadas por IA.',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={`antialiased`}>
         {children}
         <Toaster />
