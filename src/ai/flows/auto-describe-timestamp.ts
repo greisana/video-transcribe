@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -15,15 +16,15 @@ const AutoDescribeTimestampInputSchema = z.object({
   videoDataUri: z
     .string()
     .describe(
-      "A video file as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+      "Un archivo de video como URI de datos que debe incluir un tipo MIME y usar codificación Base64. Formato esperado: 'data:<mimetype>;base64,<encoded_data>'."
     ),
   timestamp: z
     .number()
-    .describe("The timestamp in seconds for which to generate a description."),
+    .describe("La marca de tiempo en segundos para la cual generar una descripción."),
   previousTimestamps: z
     .array(z.object({timestamp: z.number(), description: z.string()}))
     .optional()
-    .describe("An array of previous timestamps and descriptions for context."),
+    .describe("Un arreglo de marcas de tiempo y descripciones previas para contexto."),
 });
 
 export type AutoDescribeTimestampInput = z.infer<
@@ -31,7 +32,7 @@ export type AutoDescribeTimestampInput = z.infer<
 >;
 
 const AutoDescribeTimestampOutputSchema = z.object({
-  description: z.string().describe('The AI-generated description for the timestamp.'),
+  description: z.string().describe('La descripción generada por IA para la marca de tiempo.'),
 });
 
 export type AutoDescribeTimestampOutput = z.infer<
@@ -48,19 +49,19 @@ const prompt = ai.definePrompt({
   name: 'autoDescribeTimestampPrompt',
   input: {schema: AutoDescribeTimestampInputSchema},
   output: {schema: AutoDescribeTimestampOutputSchema},
-  prompt: `You are an AI video summarization expert. Given a video and a timestamp, you will generate a concise and descriptive summary of what is happening in the video at that timestamp.
+  prompt: `Eres un experto en resumen de videos por IA. Dado un video y una marca de tiempo, generarás un resumen conciso y descriptivo de lo que sucede en el video en esa marca de tiempo. Debes responder en español.
 
 Video: {{media url=videoDataUri}}
-Timestamp: {{timestamp}} seconds
+Marca de tiempo: {{timestamp}} segundos
 
-{% if previousTimestamps %}
-Previous Timestamps:
-  {% each previousTimestamps %}
-- {{timestamp}}s: {{description}}
-  {% endeach %}
-{% endif %}
+{{#if previousTimestamps}}
+Marcas de tiempo previas:
+  {{#each previousTimestamps}}
+- {{this.timestamp}}s: {{this.description}}
+  {{/each}}
+{{/if}}
 
-Description: `,
+Descripción: `,
 });
 
 const autoDescribeTimestampFlow = ai.defineFlow(
@@ -74,3 +75,4 @@ const autoDescribeTimestampFlow = ai.defineFlow(
     return output!;
   }
 );
+
