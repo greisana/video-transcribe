@@ -1,7 +1,8 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export', // Configura Next.js para exportar estáticamente
+  
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -17,6 +18,8 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    // Opción adicional comentada para desactivar optimización de imágenes si es necesario
+    // unoptimized: true,
   },
 };
 
